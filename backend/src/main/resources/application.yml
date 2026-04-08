@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: codesphere-backend
+  
+  # Database Configuration (temporary local dev mode: H2 in-memory)
+  datasource:
+    url: jdbc:h2:mem:codesphere_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  
+  # CORS Configuration
+  web:
+    cors:
+      allowed-origins: http://localhost:3000
+      allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+      allowed-headers: "*"
+      allow-credentials: true
+
+# Server Configuration
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
+
+# JWT Configuration
+jwt:
+  secret: your-secret-key-change-this-in-production-min-256-bits
+  expiration: 86400000 # 24 hours in milliseconds
+
+# Logging
+logging:
+  level:
+    com.cursorai: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
